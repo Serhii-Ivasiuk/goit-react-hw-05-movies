@@ -47,8 +47,6 @@ const Movies = () => {
           ))}
         </ul>
       )}
-
-      <Link to=":movieId">MovieDetails</Link>
     </div>
   );
 };
