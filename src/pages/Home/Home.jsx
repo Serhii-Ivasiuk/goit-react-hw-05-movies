@@ -1,5 +1,7 @@
+// Libs
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+// Services
 import { getDayTrendingMovies } from '../../services/themoviedb-api';
 
 const Home = () => {
@@ -9,19 +11,23 @@ const Home = () => {
     getDayTrendingMovies().then(data => setTrandingMovies(data));
   }, []);
 
+  const currentLocation = useLocation();
+
   return (
-    <>
-      <h1>Trending today</h1>
-      {trandingMovies && (
+    trandingMovies && (
+      <div>
+        <h1>Trending today</h1>
         <ul>
-          {trandingMovies.map(item => (
-            <li key={item.id}>
-              <Link to={`movies/${item.id}`}>{item.title}</Link>
+          {trandingMovies.map(({ id, title }) => (
+            <li key={id}>
+              <Link to={`movies/${id}`} state={currentLocation}>
+                {title}
+              </Link>
             </li>
           ))}
         </ul>
-      )}
-    </>
+      </div>
+    )
   );
 };
 

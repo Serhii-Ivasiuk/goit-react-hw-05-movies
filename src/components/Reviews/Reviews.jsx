@@ -1,5 +1,7 @@
+// Libs
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+// Services
 import { getMovieReviewsById } from '../../services/themoviedb-api';
 
 const Reviews = () => {
@@ -14,10 +16,10 @@ const Reviews = () => {
     <>
       {movieReviews && (
         <ul>
-          {movieReviews.map(item => (
-            <li key={item.id}>
-              <p>Author: {item.author}</p>
-              <p>{item.content}</p>
+          {movieReviews.map(({ id, author, content }) => (
+            <li key={id}>
+              <p>Author: {author}</p>
+              <p>{content}</p>
             </li>
           ))}
         </ul>
