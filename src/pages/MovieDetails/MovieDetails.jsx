@@ -13,19 +13,24 @@ const MovieDetails = () => {
   let genres = '';
   let userScore = '';
   let year = '';
+  let posterPath = '';
 
   useEffect(() => {
     getMovieDetailsById(movieId).then(data => setMovieDetails(data));
   }, [movieId]);
 
-  const handleImageError = evt => {
-    evt.target.src = 'https://via.placeholder.com/200x300';
-  };
-
   if (movieDetails) {
-    genres = movieDetails.genres.map(item => item.name).join(', ');
+    genres = movieDetails.genres.length
+      ? movieDetails.genres.map(item => item.name).join(', ')
+      : "Unfortunately, we don't have information about the genres of this movie.";
+
     userScore = `${(movieDetails.vote_average * 10).toFixed(0)}%`;
+
     year = movieDetails.release_date.substr(0, 4);
+
+    posterPath = movieDetails.poster_path
+      ? `https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}`
+      : 'https://via.placeholder.com/200x300';
   }
 
   return (
@@ -34,11 +39,10 @@ const MovieDetails = () => {
         <Link to={backLinkLocation}>⬅ go back</Link>
         <div>
           <img
-            src={`https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}`}
+            src={posterPath}
             alt={movieDetails.title}
             width="200"
             height="300"
-            onError={handleImageError}
           />
           <h1>
             {movieDetails.title} ({year})
