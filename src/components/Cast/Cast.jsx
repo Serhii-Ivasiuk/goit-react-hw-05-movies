@@ -37,7 +37,7 @@ const Cast = () => {
 
       {movieCredits?.length === 0 && (
         <p>
-          Unfortunately, we don't have information about the cast of this film.
+          Unfortunately, we don't have information about the cast of this movie.
         </p>
       )}
     </>
