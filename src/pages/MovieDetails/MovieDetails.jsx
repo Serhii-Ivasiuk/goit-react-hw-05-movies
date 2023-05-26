@@ -10,6 +10,9 @@ const MovieDetails = () => {
   const location = useLocation();
 
   const backLinkLocation = location.state ?? '/';
+  let genres = '';
+  let userScore = '';
+  let year = '';
 
   useEffect(() => {
     getMovieDetailsById(movieId).then(data => setMovieDetails(data));
@@ -19,6 +22,12 @@ const MovieDetails = () => {
     evt.target.src = 'https://via.placeholder.com/200x300';
   };
 
+  if (movieDetails) {
+    genres = movieDetails.genres.map(item => item.name).join(', ');
+    userScore = `${(movieDetails.vote_average * 10).toFixed(0)}%`;
+    year = movieDetails.release_date.substr(0, 4);
+  }
+
   return (
     movieDetails && (
       <div>
@@ -26,19 +35,19 @@ const MovieDetails = () => {
         <div>
           <img
             src={`https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}`}
-            alt={`${movieDetails.title} movie poster`}
+            alt={movieDetails.title}
             width="200"
             height="300"
             onError={handleImageError}
           />
           <h1>
-            {movieDetails.title} ({movieDetails.release_date.substr(0, 4)})
+            {movieDetails.title} ({year})
           </h1>
-          <p>User Score: {movieDetails.vote_average * 10}%------------</p>
+          <p>User Score: {userScore}</p>
           <p>Overview</p>
           <p>{movieDetails.overview}</p>
           <p>Genres</p>
-          <p>-----------</p>
+          <p>{genres}</p>
         </div>
         <hr />
 
