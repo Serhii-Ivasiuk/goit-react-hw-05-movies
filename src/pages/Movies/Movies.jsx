@@ -5,15 +5,19 @@ import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { getMoviesByTitle } from '../../services/themoviedb-api';
 
 const Movies = () => {
-  const [moviesByTitle, setMoviesByTitle] = useState(null);
+  const [movies, setMovies] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
+  const location = useLocation();
 
   useEffect(() => {
-    const movieTitle = searchParams.get('query') ?? '';
+    const query = searchParams.get('query') ?? '';
 
-    if (!movieTitle) return;
+    if (!query) {
+      setMovies(null);
+      return;
+    }
 
-    getMoviesByTitle(movieTitle).then(data => setMoviesByTitle(data));
+    getMoviesByTitle(query).then(data => setMovies(data));
   }, [searchParams]);
 
   const handleSubmit = evt => {
@@ -33,8 +37,6 @@ const Movies = () => {
     evt.target.reset();
   };
 
-  const currentLocation = useLocation();
-
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -44,11 +46,11 @@ const Movies = () => {
         <button type="submit">Search</button>
       </form>
 
-      {moviesByTitle && (
+      {movies && (
         <ul>
-          {moviesByTitle.map(({ id, title }) => (
+          {movies.map(({ id, title }) => (
             <li key={id}>
-              <Link to={`${id}`} state={currentLocation}>
+              <Link to={`${id}`} state={location}>
                 {title}
               </Link>
             </li>

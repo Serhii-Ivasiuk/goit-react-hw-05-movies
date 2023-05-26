@@ -1,6 +1,6 @@
 // Libs
 import { lazy } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 // Layout
 import Layout from './Layout/Layout';
 // Pages
@@ -21,6 +21,7 @@ export const App = () => {
           <Route path="cast" element={<Cast />} />
           <Route path="reviews" element={<Reviews />} />
         </Route>
+        <Route path="*" element={<Navigate to="/" replace={true} />} />
       </Route>
     </Routes>
   );

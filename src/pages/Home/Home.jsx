@@ -6,12 +6,11 @@ import { getDayTrendingMovies } from '../../services/themoviedb-api';
 
 const Home = () => {
   const [trandingMovies, setTrandingMovies] = useState(null);
+  const location = useLocation();
 
   useEffect(() => {
     getDayTrendingMovies().then(data => setTrandingMovies(data));
   }, []);
-
-  const currentLocation = useLocation();
 
   return (
     trandingMovies && (
@@ -20,7 +19,7 @@ const Home = () => {
         <ul>
           {trandingMovies.map(({ id, title }) => (
             <li key={id}>
-              <Link to={`movies/${id}`} state={currentLocation}>
+              <Link to={`movies/${id}`} state={location}>
                 {title}
               </Link>
             </li>

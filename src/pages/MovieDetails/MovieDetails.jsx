@@ -7,6 +7,9 @@ import { getMovieDetailsById } from '../../services/themoviedb-api';
 const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState(null);
   const { movieId } = useParams();
+  const location = useLocation();
+
+  const backLinkLocation = location.state ?? '/';
 
   useEffect(() => {
     getMovieDetailsById(movieId).then(data => setMovieDetails(data));
@@ -15,8 +18,6 @@ const MovieDetails = () => {
   const handleImageError = evt => {
     evt.target.src = 'https://via.placeholder.com/200x300';
   };
-
-  const backLinkLocation = useLocation().state ?? '/';
 
   return (
     movieDetails && (
