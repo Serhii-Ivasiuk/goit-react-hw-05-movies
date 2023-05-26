@@ -46,6 +46,13 @@ const Movies = () => {
         <button type="submit">Search</button>
       </form>
 
+      {movies?.length === 0 && (
+        <div>
+          There is no movies matching your request: "{searchParams.get('query')}
+          "
+        </div>
+      )}
+
       {movies && (
         <ul>
           {movies.map(({ id, title }) => (
