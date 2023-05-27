@@ -36,7 +36,7 @@ export const getMovieDetailsById = async movieId => {
   return response.data;
 };
 
-export const getMovieCreditsById = async movieId => {
+export const getMovieCastById = async movieId => {
   const path = `/movie/${movieId}/credits`;
 
   const response = await axios.get(`${path}?${searchParams}`);

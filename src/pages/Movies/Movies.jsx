@@ -1,15 +1,16 @@
 // Libs
 import { useEffect, useState } from 'react';
-import { Link, useLocation, useSearchParams } from 'react-router-dom';
-import { BeatLoader } from 'react-spinners';
+import { useSearchParams } from 'react-router-dom';
 // Services
 import { getMoviesByTitle } from '../../services/themoviedb-api';
+// Components
+import Loader from 'components/Loader/Loader';
+import MoviesList from 'components/MoviesList/MoviesList';
 
 const Movies = () => {
   const [movies, setMovies] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
-  const location = useLocation();
 
   useEffect(() => {
     const query = searchParams.get('query') ?? '';
@@ -52,25 +53,15 @@ const Movies = () => {
         <button type="submit">Search</button>
       </form>
 
-      {isLoading && <BeatLoader color="#36d7b7" />}
+      {isLoading && <Loader />}
 
-      {movies && (
-        <ul>
-          {movies.map(({ id, title }) => (
-            <li key={id}>
-              <Link to={`${id}`} state={{ from: location }}>
-                {title}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      )}
+      {movies && <MoviesList data={movies} />}
 
       {movies?.length === 0 && (
-        <div>
+        <p>
           There is no movies matching your request: "{searchParams.get('query')}
           "
-        </div>
+        </p>
       )}
     </>
   );

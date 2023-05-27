@@ -1,40 +1,33 @@
 // Libs
 import { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { BeatLoader } from 'react-spinners';
 // Services
 import { getDayTrendingMovies } from '../../services/themoviedb-api';
+// Components
+import Loader from 'components/Loader/Loader';
+import MoviesList from 'components/MoviesList/MoviesList';
 
 const Home = () => {
-  const [trandingMovies, setTrandingMovies] = useState(null);
+  const [movies, setMovies] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const location = useLocation();
 
   useEffect(() => {
     setIsLoading(true);
 
     getDayTrendingMovies()
-      .then(data => setTrandingMovies(data))
+      .then(data => setMovies(data))
       .finally(() => setIsLoading(false));
   }, []);
 
   return (
     <>
-      {isLoading && <BeatLoader color="#36d7b7" />}
+      {isLoading && <Loader />}
 
-      {trandingMovies && (
-        <div>
+      {movies && (
+        <>
           <h1>Trending today</h1>
-          <ul>
-            {trandingMovies.map(({ id, title }) => (
-              <li key={id}>
-                <Link to={`movies/${id}`} state={{ from: location }}>
-                  {title}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
+
+          <MoviesList data={movies} />
+        </>
       )}
     </>
   );

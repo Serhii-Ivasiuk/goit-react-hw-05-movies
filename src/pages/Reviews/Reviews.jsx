@@ -1,12 +1,14 @@
 // Libs
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { BeatLoader } from 'react-spinners';
 // Services
 import { getMovieReviewsById } from '../../services/themoviedb-api';
+// Components
+import Loader from 'components/Loader/Loader';
+import RewiewList from 'components/ReviewList/ReviewList';
 
 const Reviews = () => {
-  const [movieReviews, setMovieReviews] = useState(null);
+  const [reviews, setReviews] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const { movieId } = useParams();
 
@@ -14,28 +16,19 @@ const Reviews = () => {
     setIsLoading(true);
 
     getMovieReviewsById(movieId)
-      .then(data => setMovieReviews(data))
+      .then(data => setReviews(data))
       .finally(() => setIsLoading(false));
   }, [movieId]);
 
   return (
     <>
-      {isLoading && <BeatLoader color="#36d7b7" />}
+      {isLoading && <Loader />}
 
-      {movieReviews?.length === 0 && (
+      {reviews?.length === 0 && (
         <p>We don't have any reviews for this movie yet.</p>
       )}
 
-      {movieReviews && (
-        <ul>
-          {movieReviews.map(({ id, author, content }) => (
-            <li key={id}>
-              <p>Author: {author}</p>
-              <p>{content}</p>
-            </li>
-          ))}
-        </ul>
-      )}
+      {reviews && <RewiewList data={reviews} />}
     </>
   );
 };

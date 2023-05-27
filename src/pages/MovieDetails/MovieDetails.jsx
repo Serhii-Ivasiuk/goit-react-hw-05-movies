@@ -1,9 +1,10 @@
 // Libs
 import { Suspense, useEffect, useState } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
-import { BeatLoader } from 'react-spinners';
 // Services
 import { getMovieDetailsById } from '../../services/themoviedb-api';
+// Components
+import Loader from 'components/Loader/Loader';
 
 const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState(null);
@@ -41,7 +42,7 @@ const MovieDetails = () => {
 
   return (
     <>
-      {isLoading && <BeatLoader color="#36d7b7" />}
+      {isLoading && <Loader />}
 
       {movieDetails && (
         <div>
@@ -81,7 +82,7 @@ const MovieDetails = () => {
         </div>
       )}
 
-      <Suspense fallback={<BeatLoader color="#36d7b7" />}>
+      <Suspense fallback={<Loader />}>
         <Outlet />
       </Suspense>
     </>

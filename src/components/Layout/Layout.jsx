@@ -1,26 +1,21 @@
 // Libs
 import { Suspense } from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
-import { BeatLoader } from 'react-spinners';
+import { Outlet } from 'react-router-dom';
+// Components
+import Navigation from 'components/Navigation/Navigation';
+import Loader from 'components/Loader/Loader';
 
 const Layout = () => {
   return (
     <>
-      <nav>
-        <ul>
-          <li>
-            <NavLink to="/">Home</NavLink>
-          </li>
-          <li>
-            <NavLink to="/movies">Movies</NavLink>
-          </li>
-        </ul>
-      </nav>
-      <hr />
-
-      <Suspense fallback={<BeatLoader color="#36d7b7" />}>
-        <Outlet />
-      </Suspense>
+      <header>
+        <Navigation />
+      </header>
+      <main>
+        <Suspense fallback={<Loader />}>
+          <Outlet />
+        </Suspense>
+      </main>
     </>
   );
 };
