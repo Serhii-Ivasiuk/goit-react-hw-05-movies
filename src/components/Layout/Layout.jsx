@@ -1,10 +1,11 @@
 // Libs
 import { Suspense } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
+import { BeatLoader } from 'react-spinners';
 
 const Layout = () => {
   return (
-    <div>
+    <>
       <nav>
         <ul>
           <li>
@@ -17,10 +18,10 @@ const Layout = () => {
       </nav>
       <hr />
 
-      <Suspense fallback={<div>Loading page...</div>}>
+      <Suspense fallback={<BeatLoader color="#36d7b7" />}>
         <Outlet />
       </Suspense>
-    </div>
+    </>
   );
 };
 

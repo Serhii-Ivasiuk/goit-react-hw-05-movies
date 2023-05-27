@@ -1,11 +1,13 @@
 // Libs
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import { BeatLoader } from 'react-spinners';
 // Services
 import { getMoviesByTitle } from '../../services/themoviedb-api';
 
 const Movies = () => {
   const [movies, setMovies] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
 
@@ -17,7 +19,11 @@ const Movies = () => {
       return;
     }
 
-    getMoviesByTitle(query).then(data => setMovies(data));
+    setIsLoading(true);
+
+    getMoviesByTitle(query)
+      .then(data => setMovies(data))
+      .finally(() => setIsLoading(false));
   }, [searchParams]);
 
   const handleSubmit = evt => {
@@ -38,7 +44,7 @@ const Movies = () => {
   };
 
   return (
-    <div>
+    <>
       <form onSubmit={handleSubmit}>
         <label>
           <input type="text" name="searchInput" />
@@ -46,14 +52,9 @@ const Movies = () => {
         <button type="submit">Search</button>
       </form>
 
-      {movies?.length === 0 && (
-        <div>
-          There is no movies matching your request: "{searchParams.get('query')}
-          "
-        </div>
-      )}
+      {isLoading && <BeatLoader color="#36d7b7" />}
 
-      {movies && (
+      {movies && !isLoading && (
         <ul>
           {movies.map(({ id, title }) => (
             <li key={id}>
@@ -64,7 +65,14 @@ const Movies = () => {
           ))}
         </ul>
       )}
-    </div>
+
+      {movies?.length === 0 && !isLoading && (
+        <div>
+          There is no movies matching your request: "{searchParams.get('query')}
+          "
+        </div>
+      )}
+    </>
   );
 };
 
