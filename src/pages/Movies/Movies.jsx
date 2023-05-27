@@ -57,7 +57,7 @@ const Movies = () => {
         <ul>
           {movies.map(({ id, title }) => (
             <li key={id}>
-              <Link to={`${id}`} state={location}>
+              <Link to={`${id}`} state={{ from: location }}>
                 {title}
               </Link>
             </li>

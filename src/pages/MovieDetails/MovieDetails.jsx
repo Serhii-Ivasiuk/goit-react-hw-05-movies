@@ -9,7 +9,7 @@ const MovieDetails = () => {
   const { movieId } = useParams();
   const location = useLocation();
 
-  const backLinkLocation = location.state ?? '/';
+  const backLinkLocation = location.state?.from ?? '/';
   let genres = '';
   let userScore = '';
   let year = '';
@@ -58,12 +58,12 @@ const MovieDetails = () => {
         <p>Additional information</p>
         <ul>
           <li>
-            <Link to="cast" state={backLinkLocation}>
+            <Link to="cast" state={{ from: backLinkLocation }}>
               Cast
             </Link>
           </li>
           <li>
-            <Link to="reviews" state={backLinkLocation}>
+            <Link to="reviews" state={{ from: backLinkLocation }}>
               Reviews
             </Link>
           </li>

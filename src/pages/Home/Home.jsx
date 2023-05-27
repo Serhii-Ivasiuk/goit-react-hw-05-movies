@@ -19,7 +19,7 @@ const Home = () => {
         <ul>
           {trandingMovies.map(({ id, title }) => (
             <li key={id}>
-              <Link to={`movies/${id}`} state={location}>
+              <Link to={`movies/${id}`} state={{ from: location }}>
                 {title}
               </Link>
             </li>
