@@ -22,13 +22,13 @@ const Cast = () => {
     <>
       {isLoading && <BeatLoader color="#36d7b7" />}
 
-      {movieCredits?.length === 0 && !isLoading && (
+      {movieCredits?.length === 0 && (
         <p>
           Unfortunately, we don't have information about the cast of this movie.
         </p>
       )}
 
-      {movieCredits && !isLoading && (
+      {movieCredits && (
         <ul>
           {movieCredits.map(({ id, name, profile_path, character }) => (
             <li key={id}>

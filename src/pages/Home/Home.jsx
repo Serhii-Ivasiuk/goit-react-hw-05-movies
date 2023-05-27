@@ -22,7 +22,7 @@ const Home = () => {
     <>
       {isLoading && <BeatLoader color="#36d7b7" />}
 
-      {trandingMovies && !isLoading && (
+      {trandingMovies && (
         <div>
           <h1>Trending today</h1>
           <ul>

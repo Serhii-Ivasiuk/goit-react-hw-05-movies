@@ -43,7 +43,7 @@ const MovieDetails = () => {
     <>
       {isLoading && <BeatLoader color="#36d7b7" />}
 
-      {movieDetails && !isLoading && (
+      {movieDetails && (
         <div>
           <Link to={backLinkLocation}>⬅ go back</Link>
           <div>

@@ -54,7 +54,7 @@ const Movies = () => {
 
       {isLoading && <BeatLoader color="#36d7b7" />}
 
-      {movies && !isLoading && (
+      {movies && (
         <ul>
           {movies.map(({ id, title }) => (
             <li key={id}>
@@ -66,7 +66,7 @@ const Movies = () => {
         </ul>
       )}
 
-      {movies?.length === 0 && !isLoading && (
+      {movies?.length === 0 && (
         <div>
           There is no movies matching your request: "{searchParams.get('query')}
           "

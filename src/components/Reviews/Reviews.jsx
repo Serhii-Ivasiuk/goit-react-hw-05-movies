@@ -22,11 +22,11 @@ const Reviews = () => {
     <>
       {isLoading && <BeatLoader color="#36d7b7" />}
 
-      {movieReviews?.length === 0 && !isLoading && (
+      {movieReviews?.length === 0 && (
         <p>We don't have any reviews for this movie yet.</p>
       )}
 
-      {movieReviews && !isLoading && (
+      {movieReviews && (
         <ul>
           {movieReviews.map(({ id, author, content }) => (
             <li key={id}>
