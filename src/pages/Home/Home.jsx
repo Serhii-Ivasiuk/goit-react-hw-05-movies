@@ -12,21 +12,21 @@ const Home = () => {
     getDayTrendingMovies().then(data => setTrandingMovies(data));
   }, []);
 
+  if (!trandingMovies) return;
+
   return (
-    trandingMovies && (
-      <div>
-        <h1>Trending today</h1>
-        <ul>
-          {trandingMovies.map(({ id, title }) => (
-            <li key={id}>
-              <Link to={`movies/${id}`} state={{ from: location }}>
-                {title}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
-    )
+    <div>
+      <h1>Trending today</h1>
+      <ul>
+        {trandingMovies.map(({ id, title }) => (
+          <li key={id}>
+            <Link to={`movies/${id}`} state={{ from: location }}>
+              {title}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 

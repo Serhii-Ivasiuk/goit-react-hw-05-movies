@@ -33,48 +33,48 @@ const MovieDetails = () => {
       : 'https://via.placeholder.com/200x300';
   }
 
+  if (!movieDetails) return;
+
   return (
-    movieDetails && (
+    <div>
+      <Link to={backLinkLocation}>⬅ go back</Link>
       <div>
-        <Link to={backLinkLocation}>⬅ go back</Link>
-        <div>
-          <img
-            src={posterPath}
-            alt={movieDetails.title}
-            width="200"
-            height="300"
-          />
-          <h1>
-            {movieDetails.title} ({year})
-          </h1>
-          <p>User Score: {userScore}</p>
-          <p>Overview</p>
-          <p>{movieDetails.overview}</p>
-          <p>Genres</p>
-          <p>{genres}</p>
-        </div>
-        <hr />
-
-        <p>Additional information</p>
-        <ul>
-          <li>
-            <Link to="cast" state={{ from: backLinkLocation }}>
-              Cast
-            </Link>
-          </li>
-          <li>
-            <Link to="reviews" state={{ from: backLinkLocation }}>
-              Reviews
-            </Link>
-          </li>
-        </ul>
-        <hr />
-
-        <Suspense fallback={<div>Loading additional information...</div>}>
-          <Outlet />
-        </Suspense>
+        <img
+          src={posterPath}
+          alt={movieDetails.title}
+          width="200"
+          height="300"
+        />
+        <h1>
+          {movieDetails.title} ({year})
+        </h1>
+        <p>User Score: {userScore}</p>
+        <p>Overview</p>
+        <p>{movieDetails.overview}</p>
+        <p>Genres</p>
+        <p>{genres}</p>
       </div>
-    )
+      <hr />
+
+      <p>Additional information</p>
+      <ul>
+        <li>
+          <Link to="cast" state={{ from: backLinkLocation }}>
+            Cast
+          </Link>
+        </li>
+        <li>
+          <Link to="reviews" state={{ from: backLinkLocation }}>
+            Reviews
+          </Link>
+        </li>
+      </ul>
+      <hr />
+
+      <Suspense fallback={<div>Loading additional information...</div>}>
+        <Outlet />
+      </Suspense>
+    </div>
   );
 };
 

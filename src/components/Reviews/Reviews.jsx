@@ -12,20 +12,20 @@ const Reviews = () => {
     getMovieReviewsById(movieId).then(data => setMovieReviews(data));
   }, [movieId]);
 
+  if (!movieReviews) return;
+
   return (
     <>
-      {movieReviews && (
-        <ul>
-          {movieReviews.map(({ id, author, content }) => (
-            <li key={id}>
-              <p>Author: {author}</p>
-              <p>{content}</p>
-            </li>
-          ))}
-        </ul>
-      )}
+      <ul>
+        {movieReviews.map(({ id, author, content }) => (
+          <li key={id}>
+            <p>Author: {author}</p>
+            <p>{content}</p>
+          </li>
+        ))}
+      </ul>
 
-      {movieReviews?.length === 0 && (
+      {movieReviews.length === 0 && (
         <p>We don't have any reviews for this movie yet.</p>
       )}
     </>
