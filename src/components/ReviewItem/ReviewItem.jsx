@@ -1,12 +1,16 @@
 // Libs
 import PropTypes from 'prop-types';
+// Styled components
+import { StyledReviewItem, Author, Name } from './ReviewItem.styled';
 
 const RewiewItem = ({ data: { author, content } }) => {
   return (
-    <li>
-      <p>Author: {author}</p>
+    <StyledReviewItem>
+      <Author>
+        Author: <Name>{author}</Name>
+      </Author>
       <p>{content}</p>
-    </li>
+    </StyledReviewItem>
   );
 };
 

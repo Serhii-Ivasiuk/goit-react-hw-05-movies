@@ -1,10 +1,19 @@
 // Libs
 import { Suspense, useEffect, useState } from 'react';
-import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
+import { Outlet, useLocation, useParams } from 'react-router-dom';
 // Services
 import { getMovieDetailsById } from '../../services/themoviedb-api';
 // Components
 import Loader from 'components/Loader/Loader';
+// Styled components
+import {
+  Page,
+  MovieCard,
+  MovieInfo,
+  InfoTitle,
+  SubpagesLinkList,
+  StyledLink,
+} from './MovieDetails.styled';
 
 const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState(null);
@@ -41,51 +50,51 @@ const MovieDetails = () => {
   }
 
   return (
-    <>
+    <Page>
       {isLoading && <Loader />}
 
       {movieDetails && (
-        <div>
-          <Link to={backLinkLocation}>⬅ go back</Link>
-          <div>
+        <>
+          <StyledLink to={backLinkLocation}>⬅ go back</StyledLink>
+          <MovieCard>
             <img
               src={posterPath}
               alt={movieDetails.title}
               width="200"
               height="300"
             />
-            <h1>
-              {movieDetails.title} ({year})
-            </h1>
-            <p>User Score: {userScore}</p>
-            <p>Overview</p>
-            <p>{movieDetails.overview}</p>
-            <p>Genres</p>
-            <p>{genres}</p>
-          </div>
-          <hr />
+            <MovieInfo>
+              <h1>
+                {movieDetails.title} ({year})
+              </h1>
+              <p>User Score: {userScore}</p>
+              <InfoTitle>Overview</InfoTitle>
+              <p>{movieDetails.overview}</p>
+              <InfoTitle>Genres</InfoTitle>
+              <p>{genres}</p>
+            </MovieInfo>
+          </MovieCard>
 
-          <p>Additional information</p>
-          <ul>
+          <InfoTitle>Additional information</InfoTitle>
+          <SubpagesLinkList>
             <li>
-              <Link to="cast" state={{ from: backLinkLocation }}>
+              <StyledLink to="cast" state={{ from: backLinkLocation }}>
                 Cast
-              </Link>
+              </StyledLink>
             </li>
             <li>
-              <Link to="reviews" state={{ from: backLinkLocation }}>
+              <StyledLink to="reviews" state={{ from: backLinkLocation }}>
                 Reviews
-              </Link>
+              </StyledLink>
             </li>
-          </ul>
-          <hr />
-        </div>
+          </SubpagesLinkList>
+        </>
       )}
 
       <Suspense fallback={<Loader />}>
         <Outlet />
       </Suspense>
-    </>
+    </Page>
   );
 };
 

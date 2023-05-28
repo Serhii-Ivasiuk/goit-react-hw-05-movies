@@ -2,6 +2,14 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
+// Styled components
+import {
+  SaerchForm,
+  SaerchFormLabel,
+  SearchFormInput,
+  SearchFormBtn,
+  SearchFormBtnLabel,
+} from './SearchForm.styled';
 
 const SearchForm = ({ onSubmit }) => {
   const [query, setQuery] = useState('');
@@ -18,17 +26,22 @@ const SearchForm = ({ onSubmit }) => {
   };
 
   return (
-    <form onSubmit={onSubmit}>
-      <label>
-        <input
+    <SaerchForm onSubmit={onSubmit}>
+      <SaerchFormLabel>
+        <SearchFormInput
           type="text"
           name="searchInput"
+          autoComplete="off"
+          placeholder="Search movies"
+          autoFocus
           onChange={handleChange}
           value={query}
         />
-      </label>
-      <button type="submit">Search</button>
-    </form>
+      </SaerchFormLabel>
+      <SearchFormBtn type="submit">
+        <SearchFormBtnLabel>Search</SearchFormBtnLabel>
+      </SearchFormBtn>
+    </SaerchForm>
   );
 };
 

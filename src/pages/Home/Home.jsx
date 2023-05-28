@@ -5,6 +5,8 @@ import { getDayTrendingMovies } from '../../services/themoviedb-api';
 // Components
 import Loader from 'components/Loader/Loader';
 import MoviesList from 'components/MoviesList/MoviesList';
+// Styled components
+import { Heading } from './Home.styled';
 
 const Home = () => {
   const [movies, setMovies] = useState(null);
@@ -24,7 +26,7 @@ const Home = () => {
 
       {movies && (
         <>
-          <h1>Trending today</h1>
+          <Heading>Trending today</Heading>
 
           <MoviesList data={movies} />
         </>

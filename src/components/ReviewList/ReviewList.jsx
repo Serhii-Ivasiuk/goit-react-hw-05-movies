@@ -1,14 +1,16 @@
 // Libs
 import RewiewItem from 'components/ReviewItem/ReviewItem';
 import PropTypes from 'prop-types';
+// Styled components
+import { StyledReviewList } from './ReviewList.styled';
 
 const RewiewList = ({ data }) => {
   return (
-    <ul>
+    <StyledReviewList>
       {data.map(item => (
         <RewiewItem key={item.id} data={item} />
       ))}
-    </ul>
+    </StyledReviewList>
   );
 };
 

@@ -1,14 +1,16 @@
 // Libs
 import CastItem from 'components/CastItem/CastItem';
 import PropTypes from 'prop-types';
+// Styled components
+import { StyledCastList } from './CastList.styled';
 
 const CastList = ({ data }) => {
   return (
-    <ul>
+    <StyledCastList>
       {data.map(item => (
         <CastItem key={item.id} data={item} />
       ))}
-    </ul>
+    </StyledCastList>
   );
 };
 

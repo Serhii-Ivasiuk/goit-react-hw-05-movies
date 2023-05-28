@@ -4,18 +4,24 @@ import { Outlet } from 'react-router-dom';
 // Components
 import Navigation from 'components/Navigation/Navigation';
 import Loader from 'components/Loader/Loader';
+// Styled components
+import { Header, Container, Main } from './Layout.styled';
 
 const Layout = () => {
   return (
     <>
-      <header>
-        <Navigation />
-      </header>
-      <main>
-        <Suspense fallback={<Loader />}>
-          <Outlet />
-        </Suspense>
-      </main>
+      <Header>
+        <Container>
+          <Navigation />
+        </Container>
+      </Header>
+      <Main>
+        <Container>
+          <Suspense fallback={<Loader />}>
+            <Outlet />
+          </Suspense>
+        </Container>
+      </Main>
     </>
   );
 };

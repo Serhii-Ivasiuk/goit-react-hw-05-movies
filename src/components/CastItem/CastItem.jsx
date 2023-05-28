@@ -1,10 +1,17 @@
 // Libs
 import PropTypes from 'prop-types';
+// Styled components
+import {
+  StyledCastItem,
+  Photo,
+  CharacterInfo,
+  Character,
+} from './CastItem.styled';
 
 const CastItem = ({ data: { profile_path, name, character } }) => {
   return (
-    <li>
-      <img
+    <StyledCastItem>
+      <Photo
         src={
           profile_path
             ? `https://image.tmdb.org/t/p/w500/${profile_path}`
@@ -14,9 +21,11 @@ const CastItem = ({ data: { profile_path, name, character } }) => {
         width="100"
         height="150"
       />
-      <p>{name}</p>
-      <p>{character}</p>
-    </li>
+      <CharacterInfo>
+        <p>{name}</p>
+        <Character>{character}</Character>
+      </CharacterInfo>
+    </StyledCastItem>
   );
 };
 

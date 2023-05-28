@@ -8,6 +8,8 @@ import { getMoviesByTitle } from '../../services/themoviedb-api';
 import SearchForm from 'components/SearchForm/SearchForm';
 import Loader from 'components/Loader/Loader';
 import MoviesList from 'components/MoviesList/MoviesList';
+// Styled components
+import { Page } from './Movies.styled';
 
 const Movies = () => {
   const [movies, setMovies] = useState(null);
@@ -45,7 +47,7 @@ const Movies = () => {
   };
 
   return (
-    <>
+    <Page>
       <SearchForm onSubmit={handleSubmit} />
 
       {isLoading && <Loader />}
@@ -55,7 +57,7 @@ const Movies = () => {
       {movies?.length === 0 && (
         <p>There is no movies matching your request: "{searchValue}"</p>
       )}
-    </>
+    </Page>
   );
 };
 
