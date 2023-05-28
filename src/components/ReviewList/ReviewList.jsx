@@ -1,5 +1,6 @@
 // Libs
 import RewiewItem from 'components/ReviewItem/ReviewItem';
+import PropTypes from 'prop-types';
 
 const RewiewList = ({ data }) => {
   return (
@@ -9,6 +10,14 @@ const RewiewList = ({ data }) => {
       ))}
     </ul>
   );
+};
+
+RewiewList.propTypes = {
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    }).isRequired
+  ),
 };
 
 export default RewiewList;

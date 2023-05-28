@@ -1,9 +1,11 @@
 // Libs
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 // Services
 import { getMoviesByTitle } from '../../services/themoviedb-api';
 // Components
+import SearchForm from 'components/SearchForm/SearchForm';
 import Loader from 'components/Loader/Loader';
 import MoviesList from 'components/MoviesList/MoviesList';
 
@@ -12,56 +14,46 @@ const Movies = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
 
-  useEffect(() => {
-    const query = searchParams.get('query') ?? '';
+  const searchValue = searchParams.get('query') ?? '';
 
-    if (!query) {
+  useEffect(() => {
+    if (!searchValue) {
       setMovies(null);
       return;
     }
 
     setIsLoading(true);
 
-    getMoviesByTitle(query)
+    getMoviesByTitle(searchValue)
       .then(data => setMovies(data))
       .finally(() => setIsLoading(false));
-  }, [searchParams]);
+  }, [searchValue]);
 
   const handleSubmit = evt => {
     evt.preventDefault();
 
-    const queryValue = evt.target.elements.searchInput.value
+    const inputValue = evt.target.elements.searchInput.value
       .trim()
       .toLowerCase();
 
-    if (queryValue === '') {
-      alert('Please enter your search query');
+    if (inputValue === '') {
+      toast.info('Please, enter yor search request.');
       return;
     }
 
-    setSearchParams({ query: queryValue });
-
-    evt.target.reset();
+    setSearchParams({ query: inputValue });
   };
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <label>
-          <input type="text" name="searchInput" />
-        </label>
-        <button type="submit">Search</button>
-      </form>
+      <SearchForm onSubmit={handleSubmit} />
 
       {isLoading && <Loader />}
 
       {movies && <MoviesList data={movies} />}
 
       {movies?.length === 0 && (
-        <p>
-          There is no movies matching your request: "{searchParams.get('query')}
-          "
-        </p>
+        <p>There is no movies matching your request: "{searchValue}"</p>
       )}
     </>
   );

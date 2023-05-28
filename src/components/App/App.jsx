@@ -1,5 +1,7 @@
 // Libs
 import { Navigate, Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // Services
 import { lazyDefaultModuleImport } from 'services/lazyModuleImport';
 // Layout
@@ -13,16 +15,20 @@ const Reviews = lazyDefaultModuleImport('Reviews');
 
 export const App = () => {
   return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Home />} />
-        <Route path="movies" element={<Movies />} />
-        <Route path="movies/:movieId" element={<MovieDetails />}>
-          <Route path="cast" element={<Cast />} />
-          <Route path="reviews" element={<Reviews />} />
+    <>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="movies" element={<Movies />} />
+          <Route path="movies/:movieId" element={<MovieDetails />}>
+            <Route path="cast" element={<Cast />} />
+            <Route path="reviews" element={<Reviews />} />
+          </Route>
+          <Route path="*" element={<Navigate to="/" replace={true} />} />
         </Route>
-        <Route path="*" element={<Navigate to="/" replace={true} />} />
-      </Route>
-    </Routes>
+      </Routes>
+
+      <ToastContainer autoClose={3000} theme="colored" />
+    </>
   );
 };
