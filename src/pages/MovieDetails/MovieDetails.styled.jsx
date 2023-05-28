@@ -1,6 +1,6 @@
 // Libs
 import styled from '@emotion/styled';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export const Page = styled.div`
   display: flex;
@@ -8,18 +8,21 @@ export const Page = styled.div`
   gap: 12px;
 `;
 
-export const StyledLink = styled(Link)`
+export const StyledNavLink = styled(NavLink)`
   display: block;
   width: 140px;
+  text-align: center;
   padding: 8px 20px;
-  background-color: #0e222b;
   border: 2px solid #153341;
   border-radius: 8px;
-  text-align: center;
   text-transform: uppercase;
   font-weight: 700;
   transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
     border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &.active {
+    background-color: #0e222b;
+  }
 
   &:hover,
   &:focus {
@@ -28,18 +31,34 @@ export const StyledLink = styled(Link)`
 `;
 
 export const MovieCard = styled.div`
-  display: flex;
-  border-radius: 8px;
-  border: 3px solid rgba(0, 0, 0, 0.15);
   overflow: hidden;
+  border: 3px solid rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+
+  @media screen and (min-width: 768px) {
+    display: flex;
+  }
+`;
+
+export const MoviePoster = styled.img`
+  object-fit: cover;
+
+  @media screen and (max-width: 767.98px) {
+    width: 100%;
+  }
 `;
 
 export const MovieInfo = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding: 8px 20px;
-  border-left: 4px solid #f05d22;
+  padding: 20px;
+  border-top: 4px solid #f05d22;
+
+  @media screen and (min-width: 768px) {
+    border-top: 0;
+    border-left: 4px solid #f05d22;
+  }
 `;
 
 export const InfoTitle = styled.div`

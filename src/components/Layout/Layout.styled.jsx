@@ -21,6 +21,6 @@ export const Container = styled.div`
 `;
 
 export const Main = styled.main`
-  margin-top: 80px;
+  padding-top: 80px;
   padding-bottom: 20px;
 `;

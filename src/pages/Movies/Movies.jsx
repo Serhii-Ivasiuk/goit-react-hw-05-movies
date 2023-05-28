@@ -28,6 +28,9 @@ const Movies = () => {
 
     getMoviesByTitle(searchValue)
       .then(data => setMovies(data))
+      .catch(error =>
+        toast.error('Something went wrong, please try again later.')
+      )
       .finally(() => setIsLoading(false));
   }, [searchValue]);
 

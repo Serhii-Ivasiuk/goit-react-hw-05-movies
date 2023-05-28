@@ -1,6 +1,7 @@
 // Libs
 import { Suspense, useEffect, useState } from 'react';
 import { Outlet, useLocation, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 // Services
 import { getMovieDetailsById } from '../../services/themoviedb-api';
 // Components
@@ -9,10 +10,11 @@ import Loader from 'components/Loader/Loader';
 import {
   Page,
   MovieCard,
+  MoviePoster,
   MovieInfo,
   InfoTitle,
   SubpagesLinkList,
-  StyledLink,
+  StyledNavLink,
 } from './MovieDetails.styled';
 
 const MovieDetails = () => {
@@ -32,6 +34,9 @@ const MovieDetails = () => {
 
     getMovieDetailsById(movieId)
       .then(data => setMovieDetails(data))
+      .catch(error =>
+        toast.error('Something went wrong, please try again later.')
+      )
       .finally(() => setIsLoading(false));
   }, [movieId]);
 
@@ -55,9 +60,9 @@ const MovieDetails = () => {
 
       {movieDetails && (
         <>
-          <StyledLink to={backLinkLocation}>⬅ go back</StyledLink>
+          <StyledNavLink to={backLinkLocation}>⬅ go back</StyledNavLink>
           <MovieCard>
-            <img
+            <MoviePoster
               src={posterPath}
               alt={movieDetails.title}
               width="200"
@@ -78,14 +83,14 @@ const MovieDetails = () => {
           <InfoTitle>Additional information</InfoTitle>
           <SubpagesLinkList>
             <li>
-              <StyledLink to="cast" state={{ from: backLinkLocation }}>
+              <StyledNavLink to="cast" state={{ from: backLinkLocation }}>
                 Cast
-              </StyledLink>
+              </StyledNavLink>
             </li>
             <li>
-              <StyledLink to="reviews" state={{ from: backLinkLocation }}>
+              <StyledNavLink to="reviews" state={{ from: backLinkLocation }}>
                 Reviews
-              </StyledLink>
+              </StyledNavLink>
             </li>
           </SubpagesLinkList>
         </>

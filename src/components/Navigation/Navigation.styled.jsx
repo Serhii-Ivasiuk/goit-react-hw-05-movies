@@ -10,8 +10,10 @@ export const NavList = styled.ul`
 
 export const StyledNavLink = styled(NavLink)`
   display: block;
+  min-width: 120px;
+  text-align: center;
   padding: 8px 20px;
-  border: 2px solid transparent;
+  border: 2px solid #153341;
   border-radius: 8px;
   text-transform: uppercase;
   font-weight: 700;
@@ -20,7 +22,6 @@ export const StyledNavLink = styled(NavLink)`
 
   &.active {
     background-color: #0e222b;
-    border-color: #153341;
   }
 
   &:hover,

@@ -1,6 +1,7 @@
 // Libs
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 // Services
 import { getMovieReviewsById } from '../../services/themoviedb-api';
 // Components
@@ -17,6 +18,9 @@ const Reviews = () => {
 
     getMovieReviewsById(movieId)
       .then(data => setReviews(data))
+      .catch(error =>
+        toast.error('Something went wrong, please try again later.')
+      )
       .finally(() => setIsLoading(false));
   }, [movieId]);
 

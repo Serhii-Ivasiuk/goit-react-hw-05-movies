@@ -1,5 +1,6 @@
 // Libs
 import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 // Services
 import { getDayTrendingMovies } from '../../services/themoviedb-api';
 // Components
@@ -17,6 +18,9 @@ const Home = () => {
 
     getDayTrendingMovies()
       .then(data => setMovies(data))
+      .catch(error =>
+        toast.error('Something went wrong, please try again later.')
+      )
       .finally(() => setIsLoading(false));
   }, []);
 

@@ -1,6 +1,7 @@
 // Libs
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 // Servises
 import { getMovieCastById } from '../../services/themoviedb-api';
 // Components
@@ -17,6 +18,9 @@ const Cast = () => {
 
     getMovieCastById(movieId)
       .then(data => setCast(data))
+      .catch(error =>
+        toast.error('Something went wrong, please try again later.')
+      )
       .finally(() => setIsLoading(false));
   }, [movieId]);
 
