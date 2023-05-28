@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/398.0407e43e.chunk.js","mappings":"mMAGaA,E,QAAUC,EAAAA,GAAH,+C","sources":["pages/Home/Home.styled.jsx"],"sourcesContent":["// Libs\nimport styled from '@emotion/styled';\n\nexport const Heading = styled.h1`\n  margin-bottom: 20px;\n`;\n"],"names":["Heading","styled"],"sourceRoot":""}

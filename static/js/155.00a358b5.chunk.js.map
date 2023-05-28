@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/155.00a358b5.chunk.js","mappings":"+LAGaA,E,QAAOC,EAAAA,IAAH,kF","sources":["pages/Movies/Movies.styled.jsx"],"sourcesContent":["// Libs\nimport styled from '@emotion/styled';\n\nexport const Page = styled.div`\n  display: flex;\n  flex-direction: column;\n  gap: 24px;\n`;\n"],"names":["Page","styled"],"sourceRoot":""}
