@@ -18,9 +18,7 @@ const Reviews = () => {
 
     getMovieReviewsById(movieId)
       .then(data => setReviews(data))
-      .catch(error =>
-        toast.error('Something went wrong, please try again later.')
-      )
+      .catch(() => toast.error('Something went wrong, please try again later.'))
       .finally(() => setIsLoading(false));
   }, [movieId]);
 

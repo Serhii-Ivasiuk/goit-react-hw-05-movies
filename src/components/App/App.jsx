@@ -2,8 +2,8 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// Services
-import { lazyDefaultModuleImport } from 'services/lazyModuleImport';
+// Helpers
+import { lazyDefaultModuleImport } from 'helpers/lazyModuleImport';
 // Layout
 import Layout from '../Layout/Layout';
 // Pages

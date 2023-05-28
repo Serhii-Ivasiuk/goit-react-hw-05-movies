@@ -1,4 +1,7 @@
+// Libs
 import axios from 'axios';
+// Helpers
+import { transformMovieDetailsData } from '../helpers/transformMovieDetailsData';
 
 axios.defaults.baseURL = 'https://api.themoviedb.org/3';
 
@@ -33,7 +36,7 @@ export const getMovieDetailsById = async movieId => {
 
   const response = await axios.get(`${path}?${searchParams}`);
 
-  return response.data;
+  return transformMovieDetailsData(response.data);
 };
 
 export const getMovieCastById = async movieId => {
